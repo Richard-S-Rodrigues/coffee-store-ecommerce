@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 4em 1em;
+}
+
+.logoContainer a {
+  display: flex;
+  align-items: center;
+}
+
+.logoContainer a span {
+  color: var(--color-brown);
+}
+
+.shoppingCartContainer {
+  display: flex;
+}
+
+.shoppingCartContainer a {
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+}
+
+.shoppingCartContainer a svg {
+  color: var(--color-brown);
+  margin-right: 0.8em;
+}
+
+@media (min-width: 450px) {
+  .container {
+    padding: 4em;
+  }
+}
