@@ -21,6 +21,22 @@ a {
   --color-light-brown: #b18363;
 }
 
+button {
+  background-color: var(--color-light-brown);
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 1em;
+  border: 0;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.8s;
+}
+
+button:hover {
+  background-color: var(--color-brown);
+}
+
 h1 {
   font-size: 2rem;
 }

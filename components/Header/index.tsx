@@ -1,8 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { FaShoppingCart } from "react-icons/fa";
-import Logo from "/public/assets/logo.svg";
 
 import styles from "./index.module.css";
 
@@ -11,8 +9,10 @@ const Header = () => (
     <section className={styles.logoContainer}>
       <Link href="/">
         <a>
-          <Image src={Logo} alt="Logo" width={60} height={60} />
-          <h1>Coffee Store</h1>
+          <h1>
+            Coffee{" "}
+            <span style={{ color: "var(--color-light-brown" }}>Store</span>
+          </h1>
         </a>
       </Link>
     </section>

@@ -1,16 +1,16 @@
 .container {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   padding: 4em 1em;
+  color: #fff;
+  position: fixed;
+  z-index: 10;
 }
 
 .logoContainer a {
   display: flex;
   align-items: center;
-}
-
-.logoContainer a span {
-  color: var(--color-brown);
 }
 
 .shoppingCartContainer {
@@ -24,7 +24,7 @@
 }
 
 .shoppingCartContainer a svg {
-  color: var(--color-brown);
+  color: var(--color-light-brown);
   margin-right: 0.8em;
 }
 

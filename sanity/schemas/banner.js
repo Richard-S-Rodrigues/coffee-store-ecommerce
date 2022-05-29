@@ -4,9 +4,10 @@ export default {
   type: "document",
   fields: [
     {
-      name: "image",
-      title: "Image",
+      name: "productImage",
+      title: "ProductImage",
       type: "image",
+      description: "Product image without background",
       options: {
         hotspot: true
       }
@@ -42,13 +43,8 @@ export default {
       type: "string"
     },
     {
-      name: "largeText1",
-      title: "LargeText1",
-      type: "string"
-    },
-    {
-      name: "largeText2",
-      title: "LargeText2",
+      name: "largeText",
+      title: "LargeText",
       type: "string"
     },
     {

@@ -1,4 +1,6 @@
 import type { NextPage } from "next";
+import { useEffect, useState } from "react";
+
 import { client } from "../lib/sanityClient";
 
 import Header from "../components/Header";
@@ -7,15 +9,14 @@ import HeroBanner from "../components/HeroBanner";
 interface IBannerData {
   _id: string;
   product: string;
-  image: unknown;
+  productImage: unknown;
   buttonText: string;
   smallText?: string;
   midText?: string;
-  largeText1?: string;
-  largeText2?: string;
+  largeText?: string;
   discount?: string;
   discountTime?: string;
-  productSlug: { _type: string; current: string };
+  productSlug: { current: string };
   _createdAt: string;
   _updatedAt: string;
 }
@@ -27,7 +28,6 @@ interface IProductData {
   details: string;
   price: number;
   slug: {
-    _type: string;
     current: string;
   };
   _createdAt: string;
@@ -40,10 +40,17 @@ interface IHomeProps {
 }
 
 const Home: NextPage<IHomeProps> = ({ bannerData, productData }) => {
+  const [bannerPosition, setBannerPosition] = useState(0);
+
   return (
     <div>
       <Header />
-      <HeroBanner />
+      <HeroBanner
+        data={bannerData[bannerPosition]}
+        dataLength={bannerData.length}
+        position={bannerPosition}
+        setPosition={setBannerPosition}
+      />
     </div>
   );
 };
