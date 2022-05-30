@@ -26,14 +26,18 @@
 
 .container main {
   width: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container main > div {
   display: flex;
   flex-direction: column-reverse;
   justify-content: center;
-  margin: auto;
-  padding-top: 20em;
-  padding-bottom: 3em;
   color: #fff;
-  z-index: 1;
+  margin-top: 5em;
 }
 
 .bannerInfoContainer {
@@ -54,9 +58,14 @@
 
 @media (min-width: 450px) {
   .container main {
+    justify-content: start;
+    padding-top: 20em;
+  }
+
+  .container main > div {
+    width: 100%;
     flex-direction: row;
     justify-content: space-between;
-    padding-top: 30em;
   }
 
   .bannerInfoContainer {

@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-import { useEffect, useState } from "react";
 
 import { client } from "../lib/sanityClient";
 
@@ -40,17 +39,10 @@ interface IHomeProps {
 }
 
 const Home: NextPage<IHomeProps> = ({ bannerData, productData }) => {
-  const [bannerPosition, setBannerPosition] = useState(0);
-
   return (
     <div>
       <Header />
-      <HeroBanner
-        data={bannerData[bannerPosition]}
-        dataLength={bannerData.length}
-        position={bannerPosition}
-        setPosition={setBannerPosition}
-      />
+      <HeroBanner data={bannerData} />
     </div>
   );
 };
