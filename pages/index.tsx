@@ -4,11 +4,12 @@ import { client } from "../lib/sanityClient";
 
 import Header from "../components/Header";
 import HeroBanner from "../components/HeroBanner";
+import Products from "../components/Products";
 
 interface IBannerData {
   _id: string;
   product: string;
-  productImage: unknown;
+  productImage: IProductImage;
   buttonText: string;
   smallText?: string;
   midText?: string;
@@ -23,7 +24,7 @@ interface IBannerData {
 interface IProductData {
   _id: string;
   name: string;
-  image: unknown;
+  images: IProductImage[];
   details: string;
   price: number;
   slug: {
@@ -31,6 +32,15 @@ interface IProductData {
   };
   _createdAt: string;
   _updatedAt: string;
+}
+
+interface IProductImage {
+  asset: {
+    _ref: string;
+  };
+  options?: {
+    hotspot?: boolean;
+  };
 }
 
 interface IHomeProps {
@@ -41,8 +51,13 @@ interface IHomeProps {
 const Home: NextPage<IHomeProps> = ({ bannerData, productData }) => {
   return (
     <div>
-      <Header />
-      <HeroBanner data={bannerData} />
+      <section>
+        <Header />
+        <HeroBanner data={bannerData} />
+      </section>
+      <section>
+        <Products data={productData} />
+      </section>
     </div>
   );
 };

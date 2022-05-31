@@ -9,10 +9,10 @@ import BannerBg from "/public/assets/banner-bg.jpg";
 
 import styles from "./index.module.css";
 
-interface IBannerData {
+interface IData {
   _id: string;
   product: string;
-  productImage: unknown;
+  productImage: IProductImage;
   buttonText: string;
   smallText?: string;
   midText?: string;
@@ -24,8 +24,17 @@ interface IBannerData {
   _updatedAt: string;
 }
 
+interface IProductImage {
+  asset: {
+    _ref: string;
+  };
+  options?: {
+    hotspot?: boolean;
+  };
+}
+
 interface IHeroBannerProps {
-  data: IBannerData[];
+  data: IData[];
 }
 
 let intervalId: NodeJS.Timeout;

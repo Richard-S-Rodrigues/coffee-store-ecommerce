@@ -9,8 +9,8 @@ export default {
       type: "string"
     },
     {
-      name: "image",
-      title: "Image",
+      name: "images",
+      title: "Images",
       type: "array",
       of: [{ type: "image" }],
       options: {
