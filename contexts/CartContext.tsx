@@ -24,6 +24,8 @@ interface ICartData {
     price: number,
     quantity: number
   ) => void;
+  getQuantity: () => number;
+  getTotalPrice: () => number;
   isActive: boolean;
   setIsActive: React.Dispatch<SetStateAction<boolean>>;
 }
@@ -44,15 +46,46 @@ const CartProvider = ({ children }: ICartProviderProps) => {
     price: number,
     quantity: number
   ) => {
-    setProducts((previousProducts) => [
-      { name, image, price, quantity },
-      ...previousProducts
-    ]);
+    const productExist = products.find((product) => product.name === name);
+    const previousProducts = products.filter(
+      (product) => product.name !== name
+    );
+
+    if (productExist) {
+      productExist.quantity += quantity;
+      setProducts([productExist, ...previousProducts]);
+    } else {
+      setProducts((prevProducts) => [
+        { name, image, price, quantity },
+        ...prevProducts
+      ]);
+    }
+  };
+
+  const getQuantity = () => {
+    return products.reduce(
+      (prevProduct, product) => prevProduct + product.quantity,
+      0
+    );
+  };
+
+  const getTotalPrice = () => {
+    return products.reduce(
+      (prevProduct, product) => prevProduct + product.quantity * product.price,
+      0
+    );
   };
 
   return (
     <cartContext.Provider
-      value={{ products, addProductToCart, isActive, setIsActive }}
+      value={{
+        products,
+        addProductToCart,
+        getQuantity,
+        getTotalPrice,
+        isActive,
+        setIsActive
+      }}
     >
       {children}
     </cartContext.Provider>

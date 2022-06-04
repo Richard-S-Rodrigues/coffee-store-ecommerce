@@ -9,7 +9,8 @@ import { FaTrashAlt } from "react-icons/fa";
 import styles from "./index.module.css";
 
 const Cart = () => {
-  const { products, isActive, setIsActive } = useContext(cartContext);
+  const { products, getQuantity, getTotalPrice, isActive, setIsActive } =
+    useContext(cartContext);
 
   useEffect(() => {
     console.log(products);
@@ -22,7 +23,7 @@ const Cart = () => {
       <div>
         <main>
           <section className={styles.titleContainer}>
-            <h2>Your cart. ({products.length} items)</h2>
+            <h2>Your cart. ({getQuantity()} items)</h2>
             <BiArrowBack onClick={() => setIsActive(false)} cursor="pointer" />
           </section>
           <section className={styles.itemsContainer}>
@@ -60,7 +61,7 @@ const Cart = () => {
           <section className={styles.totalContainer}>
             <div>
               <span className={styles.total}>Total: </span>
-              <span className={styles.price}>$1200.00</span>
+              <span className={styles.price}>${getTotalPrice()}</span>
             </div>
             <button>Pay With Stripe</button>
           </section>
