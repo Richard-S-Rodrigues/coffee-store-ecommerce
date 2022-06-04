@@ -64,10 +64,20 @@ const CartProvider = ({ children }: ICartProviderProps) => {
   };
 
   const removeProductFromCart = (product: IProductData) => {
-    const updatedProducts = products.filter(
-      (productData) => productData !== product
-    );
-    setProducts(updatedProducts);
+    let productsCopy = [...products];
+    const productExist = productsCopy.find((prod) => prod === product);
+
+    if (productExist) {
+      if (productExist.quantity > 1) {
+        productsCopy[productsCopy.indexOf(productExist)].quantity -= 1;
+        setProducts(productsCopy);
+      } else {
+        const updatedProducts = productsCopy.filter(
+          (productData) => productData !== productExist
+        );
+        setProducts(updatedProducts);
+      }
+    }
   };
 
   const getQuantity = () => {
