@@ -48,6 +48,10 @@
 
 /* Details */
 
+.infoContainer {
+  width: 100%;
+}
+
 .price {
   color: var(--color-brown);
   font-weight: 800;
@@ -135,7 +139,7 @@
   }
 
   .imagesContainer {
-    width: 25em;
+    width: 30em;
     margin-right: 4em;
     margin-top: 4em;
   }
