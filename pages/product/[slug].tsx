@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import Link from "next/link";
 import Image from "next/image";
+import { cartContext } from "../../contexts/CartContext";
 import { client, urlFor } from "../../lib/sanityClient";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import Header from "../../components/Header";
@@ -32,11 +32,13 @@ interface IProductImage {
 
 interface IProductProps {
   productDetails: IProductData;
-  products: IProductData[];
 }
 
-const Product: NextPage<IProductProps> = ({ productDetails, products }) => {
+const Product: NextPage<IProductProps> = ({ productDetails }) => {
   const [imageIndex, setImageIndex] = useState(0);
+  const [productQuantity, setProductQuantity] = useState(1);
+
+  const { addProductToCart, setIsActive } = useContext(cartContext);
 
   return (
     <div className={styles.container}>
@@ -85,49 +87,60 @@ const Product: NextPage<IProductProps> = ({ productDetails, products }) => {
             <h3>Quantity:</h3>
             <p>
               <span>
-                <AiOutlineMinus />
+                <AiOutlineMinus
+                  onClick={() => {
+                    setProductQuantity((previousQuantity) =>
+                      previousQuantity > 1
+                        ? previousQuantity - 1
+                        : previousQuantity
+                    );
+                  }}
+                  cursor="pointer"
+                />
               </span>
-              <span>0</span>
+              <span>{productQuantity}</span>
               <span>
-                <AiOutlinePlus />
+                <AiOutlinePlus
+                  onClick={() =>
+                    setProductQuantity(
+                      (previousQuantity) => previousQuantity + 1
+                    )
+                  }
+                  cursor="pointer"
+                />
               </span>
             </p>
           </div>
           <div className={styles.actionsContainer}>
-            <button>Buy Now</button>
-            <button>Add To Cart</button>
+            <button
+              onClick={() => {
+                addProductToCart(
+                  productDetails.name,
+                  productDetails.images[0],
+                  productDetails.price,
+                  productQuantity
+                );
+
+                setIsActive(true);
+              }}
+            >
+              Buy Now
+            </button>
+            <button
+              onClick={() =>
+                addProductToCart(
+                  productDetails.name,
+                  productDetails.images[0],
+                  productDetails.price,
+                  productQuantity
+                )
+              }
+            >
+              Add To Cart
+            </button>
           </div>
         </section>
       </main>
-      <section className={styles.productsContainer}>
-        <h2>Other Products you may like</h2>
-        <div className={styles.productCards}>
-          {products.map(
-            (product) =>
-              product._id !== productDetails._id && (
-                <Link
-                  href={`/product/${product.slug.current}`}
-                  key={product._id}
-                >
-                  <div>
-                    <section>
-                      <Image
-                        src={urlFor(product.images[0]).url()}
-                        alt={product.name}
-                        width={200}
-                        height={200}
-                      />
-                    </section>
-                    <section>
-                      <p>{product.name}</p>
-                      <p>${product.price}</p>
-                    </section>
-                  </div>
-                </Link>
-              )
-          )}
-        </div>
-      </section>
     </div>
   );
 };
@@ -159,10 +172,7 @@ export const getStaticProps: GetStaticProps = async ({
   const productQuery = `*[_type == "product" && slug.current == "${slug}"][0]`;
   const productDetails = await client.fetch(productQuery);
 
-  const productsQuery = '*[_type == "product"]';
-  const products = await client.fetch(productsQuery);
-
-  return { props: { productDetails, products } };
+  return { props: { productDetails } };
 };
 
 export default Product;

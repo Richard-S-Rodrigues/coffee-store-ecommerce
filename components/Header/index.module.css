@@ -17,14 +17,14 @@
   display: flex;
 }
 
-.shoppingCartContainer a {
+.shoppingCartContainer {
   display: flex;
   align-items: center;
   font-size: 1.6rem;
   color: #fff;
 }
 
-.shoppingCartContainer a svg {
+.shoppingCartContainer svg {
   color: var(--color-light-brown);
   margin-right: 0.8em;
 }

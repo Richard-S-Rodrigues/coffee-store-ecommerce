@@ -7,7 +7,7 @@
   height: 100vh;
 }
 
-.container main {
+.container > main {
   display: flex;
   flex-direction: column;
   width: 80vw;
@@ -130,7 +130,7 @@
 /* Media Queries */
 
 @media (min-width: 635px) {
-  .container main {
+  .container > main {
     flex-direction: row;
   }
 

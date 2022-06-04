@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useContext } from "react";
+import { cartContext } from "../../contexts/CartContext";
 import { urlFor } from "../../lib/sanityClient";
 
 import styles from "./index.module.css";
@@ -30,30 +32,38 @@ interface IProductsProps {
   data: IData[];
 }
 
-const Products = ({ data }: IProductsProps) => (
-  <div className={styles.container}>
-    {data.length > 0 &&
-      data.map(({ _id, name, images, price, slug }) => (
-        <div key={_id}>
-          <section className={styles.imageContainer}>
-            <Image
-              src={urlFor(images[0]).url()}
-              alt={name}
-              width={200}
-              height={200}
-            />
-          </section>
-          <section className={styles.infoContainer}>
-            <p>{name}</p>
-            <p>${price}</p>
-          </section>
-          <section className={styles.actionsContainer}>
-            <Link href={`/product/${slug?.current}`}>More</Link>
-            <button>Add To Cart</button>
-          </section>
-        </div>
-      ))}
-  </div>
-);
+const Products = ({ data }: IProductsProps) => {
+  const { addProductToCart } = useContext(cartContext);
+
+  return (
+    <div className={styles.container}>
+      {data.length > 0 &&
+        data.map(({ _id, name, images, price, slug }) => (
+          <div key={_id}>
+            <section className={styles.imageContainer}>
+              <Image
+                src={urlFor(images[0]).url()}
+                alt={name}
+                width={200}
+                height={200}
+              />
+            </section>
+            <section className={styles.infoContainer}>
+              <p>{name}</p>
+              <p>${price}</p>
+            </section>
+            <section className={styles.actionsContainer}>
+              <Link href={`/product/${slug?.current}`}>More</Link>
+              <button
+                onClick={() => addProductToCart(name, images[0], price, 1)}
+              >
+                Add To Cart
+              </button>
+            </section>
+          </div>
+        ))}
+    </div>
+  );
+};
 
 export default Products;
