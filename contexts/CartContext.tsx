@@ -24,6 +24,7 @@ interface ICartData {
     price: number,
     quantity: number
   ) => void;
+  removeProductFromCart: (product: IProductData) => void;
   getQuantity: () => number;
   getTotalPrice: () => number;
   isActive: boolean;
@@ -62,6 +63,13 @@ const CartProvider = ({ children }: ICartProviderProps) => {
     }
   };
 
+  const removeProductFromCart = (product: IProductData) => {
+    const updatedProducts = products.filter(
+      (productData) => productData !== product
+    );
+    setProducts(updatedProducts);
+  };
+
   const getQuantity = () => {
     return products.reduce(
       (prevProduct, product) => prevProduct + product.quantity,
@@ -70,9 +78,14 @@ const CartProvider = ({ children }: ICartProviderProps) => {
   };
 
   const getTotalPrice = () => {
-    return products.reduce(
-      (prevProduct, product) => prevProduct + product.quantity * product.price,
-      0
+    return parseFloat(
+      products
+        .reduce(
+          (prevProduct, product) =>
+            prevProduct + product.quantity * product.price,
+          0
+        )
+        .toFixed(2)
     );
   };
 
@@ -81,6 +94,7 @@ const CartProvider = ({ children }: ICartProviderProps) => {
       value={{
         products,
         addProductToCart,
+        removeProductFromCart,
         getQuantity,
         getTotalPrice,
         isActive,
