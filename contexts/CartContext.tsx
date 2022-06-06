@@ -2,7 +2,8 @@ import { createContext, ReactNode, SetStateAction, useState } from "react";
 
 interface IProductData {
   name: string;
-  image: IProductImage;
+  details: string;
+  images: IProductImage[];
   price: number;
   quantity: number;
 }
@@ -20,7 +21,8 @@ interface ICartData {
   products: IProductData[];
   addProductToCart: (
     name: string,
-    image: IProductImage,
+    details: string,
+    images: IProductImage[],
     price: number,
     quantity: number
   ) => void;
@@ -43,7 +45,8 @@ const CartProvider = ({ children }: ICartProviderProps) => {
 
   const addProductToCart = (
     name: string,
-    image: IProductImage,
+    details: string,
+    images: IProductImage[],
     price: number,
     quantity: number
   ) => {
@@ -57,7 +60,7 @@ const CartProvider = ({ children }: ICartProviderProps) => {
       setProducts([productExist, ...previousProducts]);
     } else {
       setProducts((prevProducts) => [
-        { name, image, price, quantity },
+        { name, details, images, price, quantity },
         ...prevProducts
       ]);
     }

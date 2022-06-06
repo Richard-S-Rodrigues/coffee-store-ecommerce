@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { cartContext } from "../../contexts/CartContext";
+import { createCheckoutSession } from "../../lib/getStripe";
 import { urlFor } from "../../lib/sanityClient";
 import { BiArrowBack } from "react-icons/bi";
 import { FaTrashAlt } from "react-icons/fa";
@@ -41,7 +42,7 @@ const Cart = () => {
                       <div className={styles.itemInfo}>
                         <div className={styles.itemImageContainer}>
                           <Image
-                            src={urlFor(product.image).url()}
+                            src={urlFor(product.images[0]).url()}
                             alt={`Product: ${product.name}`}
                             width={60}
                             height={60}
@@ -73,7 +74,9 @@ const Cart = () => {
                   <span className={styles.total}>Total: </span>
                   <span className={styles.price}>${getTotalPrice()}</span>
                 </div>
-                <button>Pay With Stripe</button>
+                <button onClick={() => createCheckoutSession(products)}>
+                  Pay With Stripe
+                </button>
               </section>
             </>
           )}

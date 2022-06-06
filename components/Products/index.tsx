@@ -38,7 +38,7 @@ const Products = ({ data }: IProductsProps) => {
   return (
     <div className={styles.container}>
       {data.length > 0 &&
-        data.map(({ _id, name, images, price, slug }) => (
+        data.map(({ _id, name, details, images, price, slug }) => (
           <div key={_id}>
             <section className={styles.imageContainer}>
               <Image
@@ -55,7 +55,9 @@ const Products = ({ data }: IProductsProps) => {
             <section className={styles.actionsContainer}>
               <Link href={`/product/${slug?.current}`}>More</Link>
               <button
-                onClick={() => addProductToCart(name, images[0], price, 1)}
+                onClick={() =>
+                  addProductToCart(name, details, images, price, 1)
+                }
               >
                 Add To Cart
               </button>
