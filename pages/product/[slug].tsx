@@ -116,7 +116,8 @@ const Product: NextPage<IProductProps> = ({ productDetails }) => {
               onClick={() => {
                 addProductToCart(
                   productDetails.name,
-                  productDetails.images[0],
+                  productDetails.details,
+                  productDetails.images,
                   productDetails.price,
                   productQuantity
                 );
@@ -130,7 +131,8 @@ const Product: NextPage<IProductProps> = ({ productDetails }) => {
               onClick={() =>
                 addProductToCart(
                   productDetails.name,
-                  productDetails.images[0],
+                  productDetails.details,
+                  productDetails.images,
                   productDetails.price,
                   productQuantity
                 )

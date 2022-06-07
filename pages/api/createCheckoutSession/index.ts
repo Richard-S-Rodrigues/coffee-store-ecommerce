@@ -29,7 +29,7 @@ export default async function handler(
       payment_method_types: ["card"],
       line_items: transformedItems,
       mode: "payment",
-      success_url: `${req.headers.origin}/?success=true`,
+      success_url: `${req.headers.origin}/success`,
       cancel_url: `${req.headers.origin}/?canceled=true`
     });
 
