@@ -55,7 +55,7 @@ const Home: NextPage<IHomeProps> = ({ bannerData, productData }) => {
         <Header />
         <HeroBanner data={bannerData} />
       </section>
-      <section>
+      <section id="products">
         <Products data={productData} />
       </section>
     </div>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { useTransition, animated, useSpringRef } from "@react-spring/web";
 import { urlFor } from "../../lib/sanityClient";
@@ -72,7 +73,7 @@ const HeroBanner = ({ data }: IHeroBannerProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.bannerNavigation}>
-        {position > 0 && (
+        {position > 0 && data.length > 0 && (
           <BsArrowLeftCircle
             className={styles.leftArrow}
             onClick={() => setPosition(position - 1)}
@@ -95,31 +96,46 @@ const HeroBanner = ({ data }: IHeroBannerProps) => {
         placeholder={"blur"}
       />
       <main>
-        {transitions((style, i) => (
-          <animated.div style={style}>
-            <section className={styles.bannerInfoContainer}>
-              <p>{data[i].smallText}</p>
-              <h2>{data[i].midText}</h2>
-              <h1>{data[i].largeText}</h1>
-              <div>
-                <h2>{data[i].discount}</h2>
-                <span>{data[i].discountTime}</span>
-              </div>
-              <button>{data[i].buttonText}</button>
-            </section>
-            <section className={styles.productImageContainer}>
-              {data[i].productImage !== undefined && (
-                <Image
-                  src={urlFor(data[i].productImage).url()}
-                  alt={data[i].product}
-                  width={200}
-                  height={200}
-                  layout="responsive"
-                />
-              )}
-            </section>
-          </animated.div>
-        ))}
+        {!data.length ? (
+          <div className={styles.placeholderBanner}>
+            <h2>Buy the best coffee in the world</h2>
+            <Link href="/#products">SHOP NOW</Link>
+          </div>
+        ) : (
+          transitions((style, i) => (
+            <animated.div style={style} className={styles.bannerContent}>
+              <section className={styles.bannerInfoContainer}>
+                <p>{data[i].smallText}</p>
+                <h2>{data[i].midText}</h2>
+                <h1>{data[i].largeText}</h1>
+                <div>
+                  <h2>{data[i].discount}</h2>
+                  <span>{data[i].discountTime}</span>
+                </div>
+                <Link
+                  href={
+                    data[i]?.productSlug
+                      ? `/product/${data[i].productSlug.current}`
+                      : "/#products"
+                  }
+                >
+                  {data[i].buttonText}
+                </Link>
+              </section>
+              <section className={styles.productImageContainer}>
+                {data[i].productImage !== undefined && (
+                  <Image
+                    src={urlFor(data[i].productImage).url()}
+                    alt={data[i].product}
+                    width={180}
+                    height={180}
+                    layout="responsive"
+                  />
+                )}
+              </section>
+            </animated.div>
+          ))
+        )}
       </main>
     </div>
   );
