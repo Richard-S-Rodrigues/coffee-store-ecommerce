@@ -41,12 +41,14 @@ const Products = ({ data }: IProductsProps) => {
         data.map(({ _id, name, details, images, price, slug }) => (
           <div key={_id}>
             <section className={styles.imageContainer}>
-              <Image
-                src={urlFor(images[0]).url()}
-                alt={name}
-                width={200}
-                height={200}
-              />
+              {images && (
+                <Image
+                  src={urlFor(images[0]).url()}
+                  alt={name}
+                  width={200}
+                  height={200}
+                />
+              )}
             </section>
             <section className={styles.infoContainer}>
               <p>{name}</p>
