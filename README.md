@@ -9,4 +9,4 @@
 
 ## 💻 Project
 
-This project was built to improve my web development knowledge using **NextJS** and **TypeScript**. Learn to implement the payment checkout process using **Stripe** and handle the content management with **Sanity**.
+This project was built to improve my web development knowledge using **NextJS** and **TypeScript**. Learn to implement the payment checkout process using **Stripe** and handle the content with **Sanity**.
