@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { urlFor } from "../../../lib/sanityClient";
+import { IProductData, IProductImage } from "./../../../types/product";
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
@@ -7,14 +8,16 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { items } = req.body;
+  const items: IProductData[] = req.body.items;
 
-  const transformedItems = items.map((item: any) => {
+  const transformedItems = items.map((item) => {
     return {
       price_data: {
         currency: "usd",
         product_data: {
-          images: item.images.map((image: any) => urlFor(image).url()),
+          images: item.images.map((image: IProductImage) =>
+            urlFor(image).url()
+          ),
           name: item.name
         },
         unit_amount: item.price * 100 // convert to integer
