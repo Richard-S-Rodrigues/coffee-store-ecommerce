@@ -41,12 +41,14 @@ const Cart = () => {
                     <li key={uuidv4()}>
                       <div className={styles.itemInfo}>
                         <div className={styles.itemImageContainer}>
-                          <Image
-                            src={urlFor(product.images[0]).url()}
-                            alt={`Product: ${product.name}`}
-                            width={60}
-                            height={60}
-                          />
+                          {product.images && (
+                            <Image
+                              src={urlFor(product.images[0]).url()}
+                              alt={`Product: ${product.name}`}
+                              width={60}
+                              height={60}
+                            />
+                          )}
                         </div>
                         <div className={styles.itemDetailsContainer}>
                           <p>{product.name}</p>

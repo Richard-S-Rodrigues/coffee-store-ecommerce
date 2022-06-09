@@ -8,27 +8,7 @@ import Header from "../../components/Header";
 
 import styles from "./index.module.css";
 
-interface IProductData {
-  _id: string;
-  name: string;
-  images: IProductImage[];
-  details: string;
-  price: number;
-  slug: {
-    current: string;
-  };
-  _createdAt: string;
-  _updatedAt: string;
-}
-
-interface IProductImage {
-  asset: {
-    _ref: string;
-  };
-  options?: {
-    hotspot?: boolean;
-  };
-}
+import { IProductData } from "../../types/product";
 
 interface IProductProps {
   productDetails: IProductData;
@@ -114,13 +94,7 @@ const Product: NextPage<IProductProps> = ({ productDetails }) => {
           <div className={styles.actionsContainer}>
             <button
               onClick={() => {
-                addProductToCart(
-                  productDetails.name,
-                  productDetails.details,
-                  productDetails.images,
-                  productDetails.price,
-                  productQuantity
-                );
+                addProductToCart(productDetails, productQuantity);
 
                 setIsActive(true);
               }}
@@ -128,15 +102,7 @@ const Product: NextPage<IProductProps> = ({ productDetails }) => {
               Buy Now
             </button>
             <button
-              onClick={() =>
-                addProductToCart(
-                  productDetails.name,
-                  productDetails.details,
-                  productDetails.images,
-                  productDetails.price,
-                  productQuantity
-                )
-              }
+              onClick={() => addProductToCart(productDetails, productQuantity)}
             >
               Add To Cart
             </button>

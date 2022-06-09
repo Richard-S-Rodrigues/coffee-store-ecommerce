@@ -6,42 +6,8 @@ import Header from "../components/Header";
 import HeroBanner from "../components/HeroBanner";
 import Products from "../components/Products";
 
-interface IBannerData {
-  _id: string;
-  product: string;
-  productImage: IProductImage;
-  buttonText: string;
-  smallText?: string;
-  midText?: string;
-  largeText?: string;
-  discount?: string;
-  discountTime?: string;
-  productSlug: { current: string };
-  _createdAt: string;
-  _updatedAt: string;
-}
-
-interface IProductData {
-  _id: string;
-  name: string;
-  images: IProductImage[];
-  details: string;
-  price: number;
-  slug: {
-    current: string;
-  };
-  _createdAt: string;
-  _updatedAt: string;
-}
-
-interface IProductImage {
-  asset: {
-    _ref: string;
-  };
-  options?: {
-    hotspot?: boolean;
-  };
-}
+import { IBannerData } from "../types/banner";
+import { IProductData } from "../types/product";
 
 interface IHomeProps {
   bannerData: IBannerData[];

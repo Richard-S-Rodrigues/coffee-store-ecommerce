@@ -8,7 +8,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import styles from "./index.module.css";
 
 const Header = () => {
-  const { products, getQuantity, setIsActive } = useContext(cartContext);
+  const { getQuantity, setIsActive } = useContext(cartContext);
 
   return (
     <>

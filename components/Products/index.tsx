@@ -6,30 +6,10 @@ import { urlFor } from "../../lib/sanityClient";
 
 import styles from "./index.module.css";
 
-interface IData {
-  _id: string;
-  name: string;
-  images: IProductImage[];
-  details: string;
-  price: number;
-  slug: {
-    current: string;
-  };
-  _createdAt: string;
-  _updatedAt: string;
-}
-
-interface IProductImage {
-  asset: {
-    _ref: string;
-  };
-  options?: {
-    hotspot?: boolean;
-  };
-}
+import { IProductData } from "../../types/product";
 
 interface IProductsProps {
-  data: IData[];
+  data: IProductData[];
 }
 
 const Products = ({ data }: IProductsProps) => {
@@ -38,29 +18,25 @@ const Products = ({ data }: IProductsProps) => {
   return (
     <div className={styles.container}>
       {data.length > 0 &&
-        data.map(({ _id, name, details, images, price, slug }) => (
-          <div key={_id}>
+        data.map((product) => (
+          <div key={product._id}>
             <section className={styles.imageContainer}>
-              {images && (
+              {product.images && (
                 <Image
-                  src={urlFor(images[0]).url()}
-                  alt={name}
+                  src={urlFor(product.images[0]).url()}
+                  alt={product.name}
                   width={200}
                   height={200}
                 />
               )}
             </section>
             <section className={styles.infoContainer}>
-              <p>{name}</p>
-              <p>${price}</p>
+              <p>{product.name}</p>
+              <p>${product.price}</p>
             </section>
             <section className={styles.actionsContainer}>
-              <Link href={`/product/${slug?.current}`}>More</Link>
-              <button
-                onClick={() =>
-                  addProductToCart(name, details, images, price, 1)
-                }
-              >
+              <Link href={`/product/${product.slug?.current}`}>More</Link>
+              <button onClick={() => addProductToCart(product, 1)}>
                 Add To Cart
               </button>
             </section>
