@@ -7,7 +7,9 @@
   "author": "Richard Rodrigues <richardsouzarodrigues555@gmail.com>",
   "license": "UNLICENSED",
   "scripts": {
-    "start": "sanity start"
+    "start": "sanity start",
+    "test": "sanity check",
+    "build": "sanity build public -y"
   },
   "keywords": [
     "sanity"
@@ -26,7 +28,9 @@
     "react-dom": "^17.0",
     "styled-components": "^5.2.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@sanity/cli": "^2.30.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Richard-S-Rodrigues/coffee-store-ecommerce.git"

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "echo 'Building Sanity to public/sanity' && cd sanity && sanity build ../public/sanity -y && cd .. && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
