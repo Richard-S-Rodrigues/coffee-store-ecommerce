@@ -9,7 +9,7 @@
   "scripts": {
     "start": "sanity start",
     "test": "sanity check",
-    "build": "next build public -y"
+    "build": "next build"
   },
   "keywords": [
     "sanity"
