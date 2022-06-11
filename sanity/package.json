@@ -8,7 +8,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "sanity start",
-    "build": "sanity build"
+    "build": "sanity build static -y"
   },
   "keywords": [
     "sanity"
@@ -27,7 +27,9 @@
     "react-dom": "^17.0",
     "styled-components": "^5.2.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@sanity/cli": "^2.30.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Richard-S-Rodrigues/coffee-store-ecommerce.git"
